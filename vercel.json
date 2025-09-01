@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/nfts/:id",
+      "destination": "/api/nfts?id=:id"
+    }
+  ]
+}

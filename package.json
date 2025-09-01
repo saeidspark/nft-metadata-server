@@ -1,0 +1,9 @@
+{
+  "name": "nft-metadata-server",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "vercel-build": "echo 'Build complete'"
+  },
+  "dependencies": {}
+}
