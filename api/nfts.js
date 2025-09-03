@@ -9,10 +9,9 @@ export default function handler(req, res) {
   try {
     const { id } = req.query;
 
-    // مسیر درست برای Vercel
     const dbPath = path.join(__dirname, "..", "db.json");
-
     const db = JSON.parse(fs.readFileSync(dbPath, "utf-8"));
+
     const nft = db.nfts.find((item) => item.id.toString() === id);
 
     if (!nft) {
@@ -20,9 +19,19 @@ export default function handler(req, res) {
       return;
     }
 
+    // متادیتا با XP و Level
+    const metadata = {
+      ...nft,
+      attributes: [
+        ...(nft.attributes || []),
+        { trait_type: "XP", value: nft.xp ?? 0 },
+        { trait_type: "Level", value: nft.level ?? 1 }
+      ]
+    };
+
     res.setHeader("Content-Type", "application/json");
     res.setHeader("Access-Control-Allow-Origin", "*");
-    res.status(200).json(nft);
+    res.status(200).json(metadata);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Server crashed", details: err.message });

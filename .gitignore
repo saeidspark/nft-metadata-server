@@ -1,2 +1,5 @@
 node_modules
 .vercel
+fix.js
+metadata.json
+output.json
